@@ -1,12 +1,12 @@
 const changeTextService = require('../services/changeTextService');
 
 const handleChangeTextRequest = async (req, res) => {
-  const { type, text } = req.body;
+  const { text } = req.body;
 
   console.log("O QUE VEIO: ", type)
 
-  if (!type || !text) {
-    return res.status(400).json({ error: 'Both parameters required, type and text' });
+  if (!text) {
+    return res.status(400).json({ error: 'Text parameter required!' });
   }
 
   try {
