@@ -45,7 +45,7 @@ const processChangeTextRequest = async (text) => {
     ]);
     const response = await result.response;
     const textResponse = response?.candidates?.[0]?.content?.parts?.[0]?.text;
-    const resolvedResponse = await JSON.parse(textResponse)
+    const resolvedResponse = JSON.parse(textResponse)
     console.log("Resposta do Gemini:", resolvedResponse);
 
     if (resolvedResponse) {
