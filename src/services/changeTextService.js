@@ -48,7 +48,7 @@ const processChangeTextRequest = async (text) => {
     const resolvedResponse = await JSON.parse(textResponse)
     console.log("Resposta do Gemini:", textResponse.json);
 
-    if (textResponse) {
+    if (resolvedResponse) {
       try {
         return resolvedResponse;
       } catch (error) {
