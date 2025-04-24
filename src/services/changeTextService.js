@@ -3,7 +3,7 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const API_KEY = process.env.GEMINI_API_KEY;
 
 const genAI = new GoogleGenerativeAI(API_KEY);
-const model = genAI.GenerativeModel({ model: "gemini-pro" });
+const model = genAI.geminiPro;
 
 const processChangeTextRequest = async (type, text) => {
   const payload = {
