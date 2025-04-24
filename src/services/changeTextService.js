@@ -5,7 +5,7 @@ const API_KEY = process.env.GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(API_KEY);
 const model = genAI.geminiPro;
 
-const processChangeTextRequest = async (type, text) => {
+const processChangeTextRequest = async (text) => {
   const payload = {
     "nome": "",
     "email": "",
@@ -35,15 +35,8 @@ const processChangeTextRequest = async (type, text) => {
     ]
   };
 
-  let prompt;
-  switch (type) {
-    case 'BASIC':
-      prompt = `preciso que analise esse curriculo: ${text} e traga os dados dele para dentro desse payload: ${JSON.stringify(payload)}, e devolva apenas o payload em formato JSON. Onde não identificar campos traga com o valor: "Dados faltantes".`;
-      break;
+  const prompt = `preciso que analise esse curriculo: ${text} e traga os dados dele para dentro desse payload: ${JSON.stringify(payload)}, e devolva apenas o payload em formato JSON. Onde não identificar campos traga com o valor: "Dados faltantes".`
 
-    default:
-      break;
-  }
 
   try {
     const result = await model.generateContent(prompt);
