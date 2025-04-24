@@ -50,6 +50,8 @@ const processChangeTextRequest = async (type, text) => {
     const response = await result.response;
     const textResponse = response.candidates[0].content.parts[0].text;
 
+    console.log("Resposta do Gemini:", textResponse);
+
     try {
       return JSON.parse(textResponse);
     } catch (error) {
