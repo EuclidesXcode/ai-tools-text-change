@@ -44,13 +44,13 @@ const processChangeTextRequest = async (text) => {
       )
     ]);
     const response = await result.response;
-    const textResponse = JSON.parse(response?.candidates?.[0]?.content?.parts?.[0]?.text);
-
-    console.log("Resposta do Gemini:", textResponse);
+    const textResponse = response?.candidates?.[0]?.content?.parts?.[0]?.text;
+    const resolvedResponse = await JSON.parse(textResponse)
+    console.log("Resposta do Gemini:", textResponse.json);
 
     if (textResponse) {
       try {
-        return textResponse;
+        return resolvedResponse;
       } catch (error) {
         return { error: "Erro ao processar a resposta do Gemini" };
       }
