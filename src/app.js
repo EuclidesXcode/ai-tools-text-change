@@ -1,3 +1,4 @@
+require('dotenv').config(); // Carregue as variáveis de ambiente ANTES de qualquer outra coisa
 const express = require('express');
 const Routes = require('./routes/Routes');
 
