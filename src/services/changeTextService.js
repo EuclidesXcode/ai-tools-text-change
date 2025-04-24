@@ -41,16 +41,21 @@ const processChangeTextRequest = async (text) => {
   try {
     const result = await model.generateContent(prompt);
     const response = await result.response;
-    const textResponse = response.candidates[0].content.parts[0].text;
+    const textResponse = response?.candidates?.[0]?.content?.parts?.[0]?.text;
 
     console.log("Resposta do Gemini:", textResponse);
 
-    try {
-      return JSON.parse(textResponse);
-    } catch (error) {
-      console.error("Erro ao fazer o parse da resposta JSON do Gemini:", error);
-      console.error("Resposta bruta do Gemini:", textResponse);
-      return { error: "Erro ao processar a resposta do Gemini" };
+    if (textResponse) {
+      try {
+        return JSON.parse(textResponse);
+      } catch (error) {
+        console.error("Erro ao fazer o parse da resposta JSON do Gemini:", error);
+        console.error("Resposta bruta do Gemini:", textResponse);
+        return { error: "Erro ao processar a resposta do Gemini" };
+      }
+    } else {
+      console.error("Resposta do Gemini inválida ou incompleta:", response);
+      return { error: "Resposta do Gemini inválida ou incompleta" };
     }
   } catch (error) {
     console.error("Erro ao chamar a API do Gemini:", error);
