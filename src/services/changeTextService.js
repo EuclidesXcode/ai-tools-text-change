@@ -45,7 +45,9 @@ const processChangeTextRequest = async (text) => {
     ]);
     const response = await result.response;
     const textResponse = response?.candidates?.[0]?.content?.parts?.[0]?.text;
-    const jsonResponse = JSON.parse(textResponse.trim());
+    const removeSpaces = textResponse.trim()
+    console.log("Texto retornado:", removeSpaces);
+    const jsonResponse = JSON.parse(removeSpaces);
     console.log("Resposta do Gemini:", jsonResponse);
 
     if (jsonResponse) {
